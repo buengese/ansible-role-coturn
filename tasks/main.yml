@@ -2,11 +2,19 @@
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ lookup('first_found', coturn_variables) }}"
 
+- name: Update apt cache
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+  register: _pre_update_apt_cache
+  until: _pre_update_apt_cache is succeeded
+  when:
+    - ansible_pkg_mgr == "apt"
+
 - name: install coturn
   ansible.builtin.package:
     pkg: "{{ coturn_pkg }}"
     state: present
-    cache_valid_time: 3600
 
 - name: Give coturn access to TLS cert
   ansible.builtin.user:
