@@ -1,3 +1,7 @@
+#
+# {{ ansible_managed }}
+#
+
 # Coturn TURN SERVER configuration file
 #
 # Boolean values note: where a boolean value is supposed to be used,
@@ -256,7 +260,6 @@ use-auth-secret
 # in the user database (if present). The database-stored  value can be changed on-the-fly
 # by a separate program, so this is why that mode is considered 'dynamic'.
 #
-#static-auth-secret=north
 static-auth-secret={{ coturn_static_auth_secret }}
 
 # Server name used for
