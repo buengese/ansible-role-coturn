@@ -16,7 +16,7 @@ user:
   turnserver:
     exists: true
     groups:
-    - turnserver
+      - turnserver
     shell: /bin/false
 group:
   turnserver:

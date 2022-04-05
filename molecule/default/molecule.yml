@@ -14,7 +14,7 @@ lint: |
   ansible-lint
 provisioner:
   name: ansible
-  become: True
+  become: true
 verifier:
   name: goss
   directory: ../tests
