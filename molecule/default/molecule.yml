@@ -1,13 +1,14 @@
 ---
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
+  name: docker
 platforms:
-  - name: bullseye64-coturn
-    box: debian/bullseye64
-  - name: buster64-coturn
-    box: debian/buster64
+  - name: instance
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-debian11}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
 lint: |
   set -e
   yamllint .
@@ -17,4 +18,3 @@ provisioner:
   become: true
 verifier:
   name: goss
-  directory: ../tests
