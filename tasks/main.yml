@@ -1,8 +1,10 @@
 ---
+- name: Gather variables for each operating system
+  ansible.builtin.include_vars: "{{ lookup('first_found', coturn_variables) }}"
 
 - name: install coturn
-  ansible.builtin.apt:
-    pkg: coturn
+  ansible.builtin.package:
+    pkg: "{{ coturn_pkg }}"
     state: present
     cache_valid_time: 3600
 
@@ -18,6 +20,7 @@
     dest: /etc/default/coturn
     line: TURNSERVER_ENABLED=1
     regexp: "^#?TURNSERVER_ENABLED="
+  when: ansible_os_family == 'Debian'
 
 - name: Create parameters for Diffie–Hellman (could take a while)
   ansible.builtin.command: "openssl dhparam -out /etc/coturn-dh-{{ coturn_dhparam_length }}.pem {{ coturn_dhparam_length }}"
@@ -28,7 +31,7 @@
 
 - name: configure coturn
   ansible.builtin.template:
-    dest: /etc/turnserver.conf
+    dest: "{{ coturn_config }}"
     src: turnserver.conf.j2
     owner: root
     group: root
@@ -46,6 +49,11 @@
     name: coturn
     state: started
 
-- include: goss.yml
+- name: enable coturn
+  ansible.builtin.service:
+    name: coturn
+    enabled: true
+
+- include_tasks: goss.yml
   tags:
     - goss

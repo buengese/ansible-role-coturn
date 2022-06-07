@@ -12,6 +12,7 @@ service:
   coturn:
     enabled: true
     running: true
+{{if eq .Env.os "Debian"}}
 user:
   turnserver:
     exists: true
@@ -21,6 +22,7 @@ user:
 group:
   turnserver:
     exists: true
+{{end}}
 process:
   turnserver:
     running: true

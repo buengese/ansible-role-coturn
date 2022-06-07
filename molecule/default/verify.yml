@@ -60,6 +60,8 @@
       ansible.builtin.command: "{{ goss_bin }} -g {{ item }} validate --format {{ goss_format }}"  # noqa 301
       register: test_results
       with_items: "{{ test_files.stdout_lines }}"
+      environment:
+        os: "{{ ansible_os_family }}"
       failed_when: false
 
     - name: Display details about the Goss results

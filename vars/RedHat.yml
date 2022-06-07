@@ -1,0 +1,4 @@
+---
+coturn_pkg: coturn
+
+coturn_config: /etc/coturn/turnserver.conf
