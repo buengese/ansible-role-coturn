@@ -1,13 +1,10 @@
 ansible-role-coturn
 -------------------
-
-[![Build Status](https://github.com/systemli/ansible-role-coturn/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-role-coturn/actions?query=workflow%3AIntegration)
-
+This role was adapted from [systemli/coturn](https://github.com/systemli/ansible-role-coturn)
 
 Install coturn for Nextcloud like described here:
 https://help.nextcloud.com/t/howto-setup-nextcloud-talk-with-turn-server/30794
 
-This role might be useful in conjunction with [systemli.nextcloud](https://galaxy.ansible.com/systemli/nextcloud) or [systemli.jitsi_meet](https://galaxy.ansible.com/systemli/jitsi_meet).
 
 Role Variables
 --------------
@@ -26,29 +23,15 @@ defined when using the role:
 See [defaults/main.yml](defaults/main.yml) for a list of optional variables.
 
 
-Download
---------
+Supported OS
+------------
+- Ubuntu
+- Debian 10
+- Debian 11
+- Fedora
 
-Download latest release with `ansible-galaxy`
-
-	ansible-galaxy install systemli.coturn
-
-
-Testing & Development
----------------------
-
-For developing and testing the role we use Github Actions, Molecule, and Vagrant. On the local environment you can easily test the role with
-
-```
-molecule test
-```
 
 License
 -------
 
 GPLv3
-
-Author Information
-------------------
-
-https://www.systemli.org
