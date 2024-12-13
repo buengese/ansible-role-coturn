@@ -17,6 +17,8 @@ lint: |
 provisioner:
   name: ansible
   playbooks:
+    prepare: prepare.yml
     converge: converge.yml
+    verify: verify.yml
 verifier:
-  name: testinfra
+  name: ansible
